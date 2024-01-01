@@ -1,0 +1,3 @@
+#!/bin/sh
+
+alacritty -e sh -c "bash -c \"cd ~; exec bash\""

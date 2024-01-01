@@ -1,0 +1,104 @@
+(defwidget bar []
+  (centerbox :orientation "h"
+    (left-side-items)
+    (workspaces)
+    (sidestuff)))
+
+(defwidget sidestuff []
+  (box :class "sidestuff" :orientation "h" :space-evenly false :halign "end"
+    (box :class "background-box"
+         :orientation "h"
+         :space-evenly false
+         :halign "center"
+         :spacing 15
+      (metric :label ""
+              :value volume
+              :onchange "amixer -D pulse sset Master {}%")
+      (metric :label ""
+              :value {EWW_RAM.used_mem_perc}
+              :onchange "")
+      (metric :label ""
+              :value {round((1 - (EWW_DISK["/"].free / EWW_DISK["/"].total)) * 100, 0)}
+              :onchange "")
+      ""
+      time)))
+
+(defwidget left-side-items []
+  (box :class "left-side-items"
+       :orientation "h"
+       :space-evenly false
+       :halign "start"
+       :spacing 3
+    (home-button)
+    (favorite-apps)))
+
+(defwidget home-button []
+  (box :class "home-button-box"
+    (button :onclick "rofi -show drun"
+      (box :class "home-button-background"
+        (box :class "workspace-box" "")))))
+
+(defwidget favorite-apps []
+  (box :class "favorite-apps"
+    (box :class "background-box"
+      (button :onclick "scripts/open_new_terminal" (box :class "workspace-box" ""))
+      (button :onclick "alacritty -e nvim" (box :class "workspace-box" ""))
+      (button :onclick "thunar ~" (box :class "workspace-box" ""))
+      (button :onclick "firefox" (box :class "workspace-box" ""))
+      (button :onclick "firefox --new-window https://www.youtube.com/" (box :class "workspace-box" ""))
+      (button :onclick "alacritty -e htop" (box :class "workspace-box" "")))))
+
+(defwidget workspaces []
+  (box :class "workspaces"
+       :orientation "h"
+       :space-evenly true
+       :halign "center"
+       :spacing 3
+    (box :class "background-box"
+      (button :onclick "bspc desktop -f 1" (box :class "workspace-box" 1))
+      (button :onclick "bspc desktop -f 2" (box :class "workspace-box" 2))
+      (button :onclick "bspc desktop -f 3" (box :class "workspace-box" 3))
+      (button :onclick "bspc desktop -f 4" (box :class "workspace-box" 4))
+      (button :onclick "bspc desktop -f 5" (box :class "workspace-box" 5))
+      (button :onclick "bspc desktop -f 6" (box :class "workspace-box" 6)))))
+
+(defwidget music []
+  (box :class "music"
+       :orientation "h"
+       :space-evenly false
+       :halign "center"
+    {music != "" ? "🎵${music}" : ""}))
+
+
+(defwidget metric [label value onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" label)
+    (scale :min 0
+           :max 101
+           :active {onchange != ""}
+           :value value
+           :onchange onchange)))
+
+
+
+(deflisten music :initial ""
+  "playerctl --follow metadata --format '{{ artist }} - {{ title }}' || true")
+
+(defpoll volume :interval "1s"
+  "scripts/getvol")
+
+(defpoll time :interval "10s"
+  "date '+%H:%M'")
+
+(defwindow bar
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x "0%"
+                      :y "1%"
+                      :width "98%"
+                      :height "2%"
+                      :anchor "top center")
+  :reserve (struts :side "top" :distance "4%")
+  (bar))

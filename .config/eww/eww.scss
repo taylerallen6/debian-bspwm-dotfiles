@@ -1,0 +1,75 @@
+* {
+  all: unset; //Unsets everything so you can style everything from scratch
+  font-size: 16px;
+}
+
+//Global Styles
+.bar {
+  background-color: #2c373f;
+  color: #ffffff;
+  padding: 7px;
+  margin-left: 3px;
+  margin-right: 3px;
+  border-radius: 12px;
+}
+
+// Styles on classes (see eww.yuck for more information)
+
+.sidestuff slider {
+  all: unset;
+  color: #ffd5cd;
+}
+
+.metric scale trough highlight {
+  all: unset;
+  background-color: #D35D6E;
+  color: #000000;
+  border-radius: 10px;
+}
+.metric scale trough {
+  all: unset;
+  background-color: #4e4e4e;
+  border-radius: 50px;
+  min-height: 3px;
+  min-width: 50px;
+  margin-left: 10px;
+  margin-right: 20px;
+}
+
+.label-ram {
+  font-size: large;
+}
+
+.background-box {
+  background-color: #232830;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 8px;
+}
+.home-button-background {
+  background-color: #232830;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 3px;
+  padding-right: 3px;
+  border-radius: 8px;
+}
+.home-button-box button:hover .home-button-background {
+  background-color: #FFFFFF;
+  color: #232830;
+}
+
+.workspace-box {
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 5px;
+}
+.workspaces button:hover {
+  color: #D35D6E;
+}
+.favorite-apps button:hover {
+  color: #D35D6E;
+}
+

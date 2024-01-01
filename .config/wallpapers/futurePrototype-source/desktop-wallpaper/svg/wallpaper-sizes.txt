@@ -1,0 +1,6 @@
+wallpaper-1280x1024
+wallpaper-1600x1200
+wallpaper-1920x1080
+wallpaper-1920x1200
+wallpaper-2560x1080
+wallpaper-4096x2160
